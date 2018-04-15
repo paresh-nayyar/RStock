@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(quantmod)\n\nstart <- as.Date(\"2017-01-01\")\nend   <- as.Date(\"2017-04-23\")\n\n#xts objects (provided in the xts package) are seen as improved versions of the ts object\n#for storing time series data.\ngetSymbols(\"AAPL\", src = \"google\", from = start, to = end)\ngetSymbols(\"GOOGL\" , src = \"google\" , from = start , to = end)\n\npar(mfrow=c(2,1))\nplot(AAPL[,\"AAPL.Open\"],main = \"AAPL Open\")\nplot(AAPL[,\"AAPL.High\"],main = \"AAPL High\")\nplot(AAPL[,\"AAPL.Low\"],main = \"AAPL Low\")\nplot(AAPL[,\"AAPL.Close\"],main = \"AAPL Close\")\nplot(AAPL[,\"AAPL.Volume\"],main = \"Volume Traded Apple\")\ncandleChart(AAPL, up.col = \"black\", dn.col = \"red\", theme = \"white\")\n\nplot(GOOGL[,\"GOOGL.Open\"],main = \"GOOGL Open\")\nplot(GOOGL[,\"GOOGL.High\"],main = \"GOOGL High\")\nplot(GOOGL[,\"GOOGL.Low\"],main = \"GOOGL Low\")\nplot(GOOGL[,\"GOOGL.Close\"],main = \"GOOGL Close\")\nplot(GOOGL[,\"GOOGL.Volume\"],main = \"Volume Traded Google\")\ncandleChart(GOOGL, up.col = \"black\", dn.col = \"red\", theme = \"white\")\n\n",
+    "created" : 1492450363769.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2970794019",
+    "id" : "58E3FCA9",
+    "lastKnownWriteTime" : 1493022990,
+    "last_content_update" : 1493022990804,
+    "path" : "~/Paresh Nayyar/Data Science/R Programming/StockAnalysis/StockAnalysis/analysis.R",
+    "project_path" : "analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

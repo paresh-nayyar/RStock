@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "if (interactive()) {\n  \n  ui <- fluidPage(\n    sliderInput(\"n\", \"Number of observations\", 2, 1000, 500),\n    plotOutput(\"plot\")\n  )\n  \n  server <- function(input, output, session) {\n    \n    observe({\n      # Re-execute this reactive expression after 1000 milliseconds\n      invalidateLater(1000, session)\n      \n      # Do something each time this is invalidated.\n      # The isolate() makes this observer _not_ get invalidated and re-executed\n      # when input$n changes.\n      print(paste(\"The value of input$n is\", isolate(input$n)))\n    })\n    \n    # Generate a new histogram at timed intervals, but not when\n    # input$n changes.\n    output$plot <- renderPlot({\n      # Re-execute this reactive expression after 2000 milliseconds\n      invalidateLater(2000)\n      hist(rnorm(isolate(input$n)))\n    })\n  }\n  \n  shinyApp(ui, server)\n}",
+    "created" : 1493692701026.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1586498103",
+    "id" : "80809B9A",
+    "lastKnownWriteTime" : 32651453786095663,
+    "last_content_update" : 1493692703493,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(quantmod)\nlibrary(ggplot2)\n\nstart <- as.Date(\"2017-01-01\")\nend   <- Sys.Date()\n\ngetSymbols(\"AAPL\", src = \"google\", from = start, to = end)\ngetSymbols(\"GOOGL\" , src = \"google\" , from = start , to = end)\n\nDate    <- Date[!(weekdays(Date) %in% c(\"Saturday\",\"Sunday\"))]  #only weekdays\ngetdata1 <- as.data.frame(AAPL) \ngetdata2 <- as.data.frame(GOOGL)\n\ngoogle <- data.frame(Date = as.Date(rownames(getdata1)), Opening_Rate = getdata1$AAPL.Open , Day_High = getdata1$AAPL.High ,\n                     Day_Low = getdata1$AAPL.Low , Closing_Rate = getdata1$AAPL.Close , Volume = getdata1$AAPL.Volume)\n\napple  <- data.frame(Date = as.Date(rownames(getdata2)), Opening_Rate = getdata2$GOOGL.Open , Day_High = getdata2$GOOGL.High ,\n                     Day_Low = getdata2$GOOGL.Low , Closing_Rate = getdata2$GOOGL.Close , Volume = getdata2$GOOGL.Volume)\n\n\n# Plotting\n\ng1 <- ggplot(google, aes(Date)) + geom_line(aes(y = Opening_Rate , colour = \"Opening_Rate\"),size = 1.2) +\n                           geom_line(aes(y = Closing_Rate , colour = \"Closing_Rate\"), size = 1.2) +\n                           xlab(\"Date\") + ylab(\"Stock Price\") + ggtitle(\"Google Index\") +\n                           theme(plot.title = element_text(lineheight=.7, face=\"bold\"))+\n                           scale_color_manual(name = \"Rate\" ,values=c(\"Opening_Rate\"=\"blue\", \"Closing_Rate\"=\"brown\"))\n\ng2 <- ggplot(apple, aes(Date)) + geom_line(aes(y = Opening_Rate , colour = \"Opening_Rate\"),size = 1.2) +\n                                  geom_line(aes(y = Closing_Rate , colour = \"Closing_Rate\"), size = 1.2) +\n                                  xlab(\"Date\") + ylab(\"Stock Price\") + ggtitle(\"Apple Index\") +\n                                  theme(plot.title = element_text(lineheight=.7, face=\"bold\"))+\n                                  scale_color_manual(name = \"Rate\" ,values=c(\"Opening_Rate\"=\"blue\", \"Closing_Rate\"=\"brown\"))\n\nplot_grid(g1, g2, labels= NULL, ncol = 1, nrow = 2)\n\n# Interactive Plots\n\napple_xts_open  <- xts(apple$Opening_Rate, order.by = apple$Date , frequency = 365)\napple_xts_close <- xts(apple$Closing_Rate, order.by = apple$Date , frequency = 365)\nplot.xts(apple_xts_open)\n\nstocks <- cbind(apple_xts_open,apple_xts_close)\n\ndygraph(stocks,ylab=\"Close\",\n        main=\"Apple Open and Close Price\") %>%\n        dySeries(\"..1\",label=\"Apple Open \") %>%\n        dySeries(\"..2\",label=\"Apple Close\") %>%\n        dyOptions(colors = c(\"blue\",\"brown\")) %>%\n        dyRangeSelector() %>%\n    dyOptions(strokeWidth = 3)\n\ndygraph(mat , main = 'Apple Stock' , xlab = 'Date' , ylab = 'Stock Price')  %>%\n      dyCandlestick() %>%\n      dyRangeSelector()\n",
+    "created" : 1493022408525.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "728184510",
+    "id" : "E29FDCC",
+    "lastKnownWriteTime" : 1493044891,
+    "last_content_update" : 1493044891579,
+    "path" : "~/Paresh Nayyar/Data Science/R Programming/StockAnalysis/StockAnalysis/plottingTS.R",
+    "project_path" : "plottingTS.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

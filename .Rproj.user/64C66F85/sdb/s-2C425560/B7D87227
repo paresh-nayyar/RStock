@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nlibrary(magrittr)\n\nui <- shinyServer(fluidPage(\n  plotOutput(\"first_column\")\n))\n\nserver <- shinyServer(function(input, output, session){\n  # Function to get new observations\n  get_new_data <- function(){\n    data <- rnorm(5) %>% rbind %>% data.frame\n    return(data)\n  }\n  \n  # Initialize my_data\n  my_data <<- get_new_data()\n  \n  # Function to update my_data\n  update_data <- function(){\n    my_data <<- rbind(get_new_data(), my_data)\n  }\n  \n  # Plot the 30 most recent values\n  output$first_column <- renderPlot({\n    print(\"Render\")\n    invalidateLater(1000, session)\n    update_data()\n    print(my_data)\n    plot(X1 ~ 1, data=my_data[1:30,], ylim=c(-3, 3), las=1, type=\"l\")\n  })\n})\n\nshinyApp(ui=ui,server=server)",
+    "created" : 1493022283325.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4058678432",
+    "id" : "B7D87227",
+    "lastKnownWriteTime" : 1492749778,
+    "last_content_update" : 1493692637327,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
