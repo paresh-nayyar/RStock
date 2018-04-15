@@ -45,13 +45,16 @@ plot.xts(apple_xts_open)
 
 stocks <- cbind(apple_xts_open,apple_xts_close)
 
-dygraph(stocks,ylab="Close",
+dygraph(stocks,ylab="Price",
         main="Apple Open and Close Price") %>%
         dySeries("..1",label="Apple Open ") %>%
         dySeries("..2",label="Apple Close") %>%
         dyOptions(colors = c("blue","brown")) %>%
         dyRangeSelector() %>%
     dyOptions(strokeWidth = 3)
+
+mat <- as.matrix(apple[,2:5])
+rownames(mat) <- as.character(apple$Date)
 
 dygraph(mat , main = 'Apple Stock' , xlab = 'Date' , ylab = 'Stock Price')  %>%
       dyCandlestick() %>%
