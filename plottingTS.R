@@ -14,10 +14,10 @@ Date    <- Date[!(weekdays(Date) %in% c("Saturday","Sunday"))]  #only weekdays
 getdata1 <- as.data.frame(AAPL) 
 getdata2 <- as.data.frame(GOOGL)
 
-google <- data.frame(Date = as.Date(rownames(getdata1)), Opening_Rate = getdata1$AAPL.Open , Day_High = getdata1$AAPL.High ,
+apple <- data.frame(Date = as.Date(rownames(getdata1)), Opening_Rate = getdata1$AAPL.Open , Day_High = getdata1$AAPL.High ,
                      Day_Low = getdata1$AAPL.Low , Closing_Rate = getdata1$AAPL.Close , Volume = getdata1$AAPL.Volume)
 
-apple  <- data.frame(Date = as.Date(rownames(getdata2)), Opening_Rate = getdata2$GOOGL.Open , Day_High = getdata2$GOOGL.High ,
+google  <- data.frame(Date = as.Date(rownames(getdata2)), Opening_Rate = getdata2$GOOGL.Open , Day_High = getdata2$GOOGL.High ,
                      Day_Low = getdata2$GOOGL.Low , Closing_Rate = getdata2$GOOGL.Close , Volume = getdata2$GOOGL.Volume)
 
 
