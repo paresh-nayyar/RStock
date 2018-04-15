@@ -1,11 +1,14 @@
 library(quantmod)
 library(ggplot2)
+library(cowplot)
+library(dplyr)
+library(dygraphs)
 
 start <- as.Date("2017-01-01")
 end   <- Sys.Date()
 
-getSymbols("AAPL", src = "google", from = start, to = end)
-getSymbols("GOOGL" , src = "google" , from = start , to = end)
+getSymbols("AAPL", src = "yahoo", from = start, to = end)
+getSymbols("GOOGL" , src = "yahoo" , from = start , to = end)
 
 Date    <- Date[!(weekdays(Date) %in% c("Saturday","Sunday"))]  #only weekdays
 getdata1 <- as.data.frame(AAPL) 
