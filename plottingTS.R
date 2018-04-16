@@ -37,6 +37,16 @@ g2 <- ggplot(apple, aes(Date)) + geom_line(aes(y = Opening_Rate , colour = "Open
 
 plot_grid(g1, g2, labels= NULL, ncol = 1, nrow = 2)
 
+
+# PLotting with two different scale
+par(mar = c(5,5,2,5))
+plot(apple$Opening_Rate,type = 'l',col='red3',ylab = 'Apple Opening Price')
+par(new=T)
+plot(google$Opening_Rate,type = 'l',col='blue',xlab = NA,ylab = NA,axes = F)
+axis(side=4) #pu the axis on right side
+mtext(side = 4,line = 3,'Google Opening Price')
+legend('topleft',legend = c('Apple','Google'),col=c('red3','blue'),lty = c(1,1),cex = 0.8)
+
 # Interactive Plots
 
 apple_xts_open  <- xts(apple$Opening_Rate, order.by = apple$Date , frequency = 365)
@@ -59,3 +69,7 @@ rownames(mat) <- as.character(apple$Date)
 dygraph(mat , main = 'Apple Stock' , xlab = 'Date' , ylab = 'Stock Price')  %>%
       dyCandlestick() %>%
       dyRangeSelector()
+
+# Plot Returns
+getstocks <- as.matrix(cbind('Apple.Close'=apple$Closing_Rate,'Google.Close'=google$Closing_Rate))
+stock_return <- apply(getstocks,1,function(x) {x/getstocks[1,]}) %>% t 
